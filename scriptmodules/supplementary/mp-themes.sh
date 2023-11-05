@@ -18,7 +18,7 @@ rp_module_desc="Microplay-hub themes for Emulation Station"
 rp_module_repo="git https://github.com/microplay-hub/mpthemes.git master"
 rp_module_section="config"
 rp_module_section="main"
-rp_module_flags="noinstclean !rpi !g1"
+rp_module_flags="noinstclean !g1"
 
 function depends_mpthemes() {
     if isPlatform "x11"; then
