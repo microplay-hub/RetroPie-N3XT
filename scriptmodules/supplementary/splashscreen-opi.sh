@@ -10,7 +10,7 @@
 # See the LICENSE.md file at the top-level directory of this distribution and
 # at https://raw.githubusercontent.com/RetroPie/RetroPie-Setup/master/LICENSE.md
 #
-# splashscreen-opi v2.06 - 2023-03-10
+# splashscreen-opi v2.07 - 2023-11-05
 # GUI v2
 
 rp_module_id="splashscreen-opi"
@@ -166,14 +166,14 @@ function armv7-mali_splashscreen-opi() {
 
 function rpi_splashscreen-opi() {
     iniSet "SBC" "rpi"
-    iniSet "IMGVIEWER" "/opt/retropie/supplementary/omxiv/omxiv"
-    iniSet "IMGVIEWERO1" "-b"
-    iniSet "IMGVIEWERO2" "-t 6 -T blend -b --once -f"
-    iniSet "IMGVIEWERO3" "--once -t"
-    iniSet "IMGVIEWERO4" "--layer 10001 -f"
-    iniSet "IMGVIEWERO5" "--layer 10001 -r"
-    iniSet "AVPLAYER" "omxplayer"
-    iniSet "AVPLAYEROPT" "--no-osd -b --layer 10001"
+    iniSet "IMGVIEWER" "fbi"
+    iniSet "IMGVIEWERO1" "--noverbose --autozoom"
+    iniSet "IMGVIEWERO2" "--timeout 6 --once --autozoom --list"
+    iniSet "IMGVIEWERO3" "-T 2 -once -t"
+    iniSet "IMGVIEWERO4" "-noverbose -a -l"
+    iniSet "IMGVIEWERO5" "-noverbose -a"
+    iniSet "AVPLAYER" "mpv"
+    iniSet "AVPLAYEROPT" "-vo value -fs"
     iniSet "BOOTSND" "bootsnd.ogg"
     iniSet "BOOTSNDFOLDER" "opt-retropie"
     iniSet "BOOTSNDFOLDER2" "/opt/retropie/supplementary/splashscreen-opi"
