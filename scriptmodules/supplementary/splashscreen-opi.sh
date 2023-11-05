@@ -172,12 +172,12 @@ function armv7-mali_splashscreen-opi() {
 
 function rpi4_splashscreen-opi() {
     iniSet "SBC" "rpi4"
-    iniSet "IMGVIEWER" "fbi"
-    iniSet "IMGVIEWERO1" "--noverbose --autozoom"
-    iniSet "IMGVIEWERO2" "--timeout 6 --once --autozoom --list"
-    iniSet "IMGVIEWERO3" "-T 2 -once -t"
-    iniSet "IMGVIEWERO4" "-noverbose -a -l"
-    iniSet "IMGVIEWERO5" "-noverbose -a"
+    iniSet "IMGVIEWER" "/opt/retropie/supplementary/omxiv/omxiv"
+    iniSet "IMGVIEWERO1" "-b"
+    iniSet "IMGVIEWERO2" "-t 6 -T blend -b --once -f"
+    iniSet "IMGVIEWERO3" "--once -t"
+    iniSet "IMGVIEWERO4" "--layer 1000 -f"
+    iniSet "IMGVIEWERO5" "--layer 1000 -r"
     iniSet "AVPLAYER" "mpv"
     iniSet "AVPLAYEROPT" "-vo value -fs"
     iniSet "BOOTSND" "bootsnd.ogg"
