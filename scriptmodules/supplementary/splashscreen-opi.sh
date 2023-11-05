@@ -14,10 +14,10 @@
 # GUI v2
 
 rp_module_id="splashscreen-opi"
-rp_module_desc="Configure Splashscreen for OrangePi"
+rp_module_desc="Configure Splashscreen for KMS and PI-Boards"
 rp_module_section="main"
 rp_module_repo="git https://github.com/microplay-hub/splashscreen-opi.git master"
-rp_module_flags="noinstclean !rpi"
+rp_module_flags="noinstclean"
 
 function _update_hook_splashscreen-opi() {
     # make sure splashscreen is always up to date if updating just RetroPie-Setup
