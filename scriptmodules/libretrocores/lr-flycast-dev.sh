@@ -68,7 +68,7 @@ function configure_lr-flycast-dev() {
 
     [[ "$md_mode" == "remove" ]] && return
 
-    for sys in "arcade" "dreamcast"; do
+    for sys in "arcade" "atomiswave" "naomi" "dreamcast"; do
         mkRomDir "$sys"
         defaultRAConfig "$sys"
     done
