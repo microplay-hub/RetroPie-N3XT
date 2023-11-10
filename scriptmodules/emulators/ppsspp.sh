@@ -179,6 +179,7 @@ function configure_ppsspp() {
 
     addEmulator 0 "$md_id" "psp" "pushd $md_inst; $md_inst/PPSSPPSDL ${extra_params[*]} %ROM%; popd"
     addSystem "psp"
+    addSystem "pspminis"    
 
     # if we are removing the last remaining psp emu - remove the symlink
     if [[ "$md_mode" == "remove" ]]; then
