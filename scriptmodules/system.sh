@@ -458,6 +458,21 @@ function get_platform() {
                         *rk3588*)
                             __platform="rk3588"
                             ;;
+                        *sun8i-h2*)
+                            __platform="sun8i-h3"
+                            ;;
+                        *sun8i-h3*)
+                            __platform="sun8i-h3"
+                            ;;
+                        *sun50i-h616*)
+                           __platform="sun50i-h616"
+                           ;;
+                        *sun50i-h6*)
+                            __platform="sun50i-h6"
+                            ;;
+                        *rk3399*)
+                           __platform="rk3399"
+                           ;;
                     esac
                 elif [[ -e "/sys/devices/soc0/family" ]]; then
                     case "$(tr -d '\0' < /sys/devices/soc0/family)" in
@@ -680,3 +695,24 @@ function platform_vero4k() {
     __default_cflags="-I/opt/vero3/include -L/opt/vero3/lib"
     __platform_flags+=(mali gles)
 }
+
+function platform_sun8i-h3() {
+    cpu_armv7
+    __platform_flags+=(kms gles)
+}
+
+function platform_sun50i-h6() {
+    cpu_armv8 "cortex-a53"
+    __platform_flags+=(kms gles gles3 gles31)
+}
+
+function platform_sun50i-h616() {
+    cpu_armv8 "cortex-a53"
+    __platform_flags+=(kms gles gles3 gles31)
+}
+
+function platform_rk3399() {
+    cpu_armv8 "cortex-a53"
+    __platform_flags+=(kms gles gles3 gles31)
+}
+
