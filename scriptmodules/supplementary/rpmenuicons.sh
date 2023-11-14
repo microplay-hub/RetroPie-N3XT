@@ -10,7 +10,7 @@
 # See the LICENSE.md file at the top-level directory of this distribution and
 # at https://raw.githubusercontent.com/RetroPie/RetroPie-Setup/master/LICENSE.md
 #
-# rpmenu-iconscript v1.2 - 2023-02-20
+# rpmenu-iconscript v1.3 - 2023-11-14
 
 rp_module_id="rpmenu-icons"
 rp_module_desc="Retropiemenu Icon-Settings for ES"
@@ -34,14 +34,14 @@ function sources_rpmenu-icons() {
 function install_rpmenu-icons() {
 
     if isPlatform "sun50i-h616"; then
-		local rpdir="$datadir/retropiemenu-opi"
+		local rpdir="$datadir/retropiemenu-nxt"
     elif isPlatform "sun50i-h6"; then
-		local rpdir="$datadir/retropiemenu-opi"
+		local rpdir="$datadir/retropiemenu-nxt"
     elif isPlatform "sun8i-h3"; then
-		local rpdir="$datadir/retropiemenu-opi"
+		local rpdir="$datadir/retropiemenu-nxt"
     elif isPlatform "armv7-mali"; then
-		local rpdir="$datadir/retropiemenu-opi"
-	elif isPlatform "rpi"; then
+		local rpdir="$datadir/retropiemenu-nxt"
+    elif isPlatform "rpi"; then
 		local rpdir="$datadir/retropiemenu"
     fi
 	
@@ -70,14 +70,14 @@ function install_rpmenu-icons() {
 
 function remove_rpmenu-icons() {
     if isPlatform "sun50i-h616"; then
-		local rpdir="$datadir/retropiemenu-opi"
+		local rpdir="$datadir/retropiemenu-nxt"
     elif isPlatform "sun50i-h6"; then
-		local rpdir="$datadir/retropiemenu-opi"
+		local rpdir="$datadir/retropiemenu-nxt"
     elif isPlatform "sun8i-h3"; then
-		local rpdir="$datadir/retropiemenu-opi"
+		local rpdir="$datadir/retropiemenu-nxt"
     elif isPlatform "armv7-mali"; then
-		local rpdir="$datadir/retropiemenu-opi"
-	elif isPlatform "rpi"; then
+		local rpdir="$datadir/retropiemenu-nxt"
+    elif isPlatform "rpi"; then
 		local rpdir="$datadir/retropiemenu"
     fi
 	
@@ -98,14 +98,14 @@ function configrpm_rpmenu-icons() {
 function changestatus_rpmenu-icons() {
 
     if isPlatform "sun50i-h616"; then
-		local rpdir="$datadir/retropiemenu-opi"
+		local rpdir="$datadir/retropiemenu-nxt"
     elif isPlatform "sun50i-h6"; then
-		local rpdir="$datadir/retropiemenu-opi"
+		local rpdir="$datadir/retropiemenu-nxt"
     elif isPlatform "sun8i-h3"; then
-		local rpdir="$datadir/retropiemenu-opi"
+		local rpdir="$datadir/retropiemenu-nxt"
     elif isPlatform "armv7-mali"; then
-		local rpdir="$datadir/retropiemenu-opi"
-	elif isPlatform "rpi"; then
+		local rpdir="$datadir/retropiemenu-nxt"
+    elif isPlatform "rpi"; then
 		local rpdir="$datadir/retropiemenu"
     fi
 
