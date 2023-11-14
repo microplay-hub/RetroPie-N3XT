@@ -156,6 +156,20 @@ function _get_branch_emulationstation() {
 
 function sources_emulationstation() {
     gitPullOrClone
+
+        applyPatch "$scriptdir/scriptmodules/$md_type/emulationstation-nxt/emulationstation-100.02-PR725-background-music-player.patch"
+
+    if isPlatform "sun50i-h616"; then
+        applyPatch "$scriptdir/scriptmodules/$md_type/emulationstation-nxt/emulationstation-100.03-sound-menu.patch"
+    fi
+	
+    if isPlatform "sun50i-h6"; then
+        applyPatch "$scriptdir/scriptmodules/$md_type/emulationstation-nxt/emulationstation-100.03-sound-menu.patch"
+    fi
+	
+    if isPlatform "sun8i-h3"; then
+        applyPatch "$scriptdir/scriptmodules/$md_type/emulationstation-nxt/emulationstation-100.03-sound-menu.patch"
+    fi
 }
 
 function build_emulationstation() {
@@ -322,6 +336,7 @@ function configure_emulationstation() {
 
     install_launch_emulationstation
 
+    mkdir -p "$datadir/musics"
     mkdir -p "/etc/emulationstation"
 
     # ensure we have a default theme
