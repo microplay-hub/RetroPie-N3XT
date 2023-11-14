@@ -10,28 +10,31 @@
 # See the LICENSE.md file at the top-level directory of this distribution and
 # at https://raw.githubusercontent.com/RetroPie/RetroPie-Setup/master/LICENSE.md
 #
-# rpmenu-iconscript v1.3 - 2023-11-14
+# tekmenu-iconscript v1.4 - 2023-11-14
 
-rp_module_id="rpmenu-icons"
+rp_module_id="tekmenu-icons"
 rp_module_desc="Retropiemenu Icon-Settings for ES"
-rp_module_repo="git https://github.com/Liontek1985/rpmenu-icons.git master"
+rp_module_repo="git https://github.com/Liontek1985/tekmenu-icons.git master"
 rp_module_section="main"
 rp_module_flags="noinstclean"
 
-function depends_rpmenu-icons() {
+function depends_tekmenu-icons() {
     local depends=(cmake)
      getDepends "${depends[@]}"
 }
 
+function _update_hook_retropiemenu-nxt() {
+    renameModule "rpmenu-icons" "tekmenu-icons"
+}
 
-function sources_rpmenu-icons() {
+function sources_tekmenu-icons() {
     if [[ -d "$md_inst" ]]; then
         git -C "$md_inst" reset --hard  # ensure that no local changes exist
     fi
     gitPullOrClone "$md_inst"
 }
 
-function install_rpmenu-icons() {
+function install_tekmenu-icons() {
 
     if isPlatform "sun50i-h616"; then
 		local rpdir="$datadir/retropiemenu-nxt"
@@ -68,7 +71,7 @@ function install_rpmenu-icons() {
 }
 
 
-function remove_rpmenu-icons() {
+function remove_tekmenu-icons() {
     if isPlatform "sun50i-h616"; then
 		local rpdir="$datadir/retropiemenu-nxt"
     elif isPlatform "sun50i-h6"; then
@@ -90,12 +93,12 @@ function remove_rpmenu-icons() {
     rm -r "$configdir/all/$md_id.cfg"	
 }
 
-function configrpm_rpmenu-icons() {
+function configrpm_tekmenu-icons() {
 	chown $user:$user "$configdir/all/$md_id.cfg"	
     iniConfig "=" '"' "$configdir/all/$md_id.cfg"	
 }
 
-function changestatus_rpmenu-icons() {
+function changestatus_tekmenu-icons() {
 
     if isPlatform "sun50i-h616"; then
 		local rpdir="$datadir/retropiemenu-nxt"
@@ -199,7 +202,7 @@ function changestatus_rpmenu-icons() {
     esac
 }
 
-function gui_rpmenu-icons() {
+function gui_tekmenu-icons() {
 
     local cmd=(dialog --default-item "$default" --backtitle "$__backtitle" --menu "Choose an option" 22 76 16)
 	
@@ -226,12 +229,12 @@ function gui_rpmenu-icons() {
     if [[ -n "$choice" ]]; then
         case "$choice" in
             I)
-				configrpm_rpmenu-icons
-				changestatus_rpmenu-icons
+				configrpm_tekmenu-icons
+				changestatus_tekmenu-icons
                 ;;
             X)
-				configrpm_rpmenu-icons
-				changestatus_rpmenu-icons
+				configrpm_tekmenu-icons
+				changestatus_tekmenu-icons
                 ;;				
         esac
     fi
