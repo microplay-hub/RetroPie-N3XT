@@ -1,12 +1,15 @@
-RetroPie-Setup
-==============
+MICROPLAY-HUB (RetroPie-Setup)
+========================
 
-General Usage
--------------
+<img src="https://github.com/microplay-hub/mpcore-splashscreens/raw/master/mpcore-splashscreen.png" width="320" height="180"><img src="https://github.com/Liontek1985/rpmenu-icons/raw/master/icons_nes/rpsetup.png" width="180" height="180"><img src="https://github.com/Liontek1985/tekcommand/raw/master/configs/nes/launching.png" width="300" height="160">
 
-Shell script to setup the Raspberry Pi, Vero4K, ODroid-C1 or a PC running Ubuntu with many emulators and games, using EmulationStation as the graphical front end. Bootable pre-made images for the Raspberry Pi are available for those that want a ready-to-go system, downloadable from the releases section of GitHub or via our website at https://retropie.org.uk.
+This custom fork from RetroPie is optimized by microplay-hub and Liontek1985 for OrangePi-Devices and similar like sunxi
 
-This script is designed for use on Raspberry Pi OS (previously called Raspbian) on the Raspberry Pi, OSMC on the Vero4K or Ubuntu on the ODroid-C1 or a PC.
+## General Information
+
+Shell script to setup sunxi Devices (Allwinner) like Orangepi, Bananapi, Mangopi, Tritium with many emulators and games, using a custom version of EmulationStation as the graphical front end. https://microplay-hub.de
+
+This script is designed for use on Armbian OS or Debian OS on your SBC-Board.
 
 To run the RetroPie Setup Script make sure that your APT repositories are up-to-date and that Git is installed:
 
@@ -20,7 +23,7 @@ Then you can download the latest RetroPie setup script with:
 
 ```shell
 cd
-git clone --depth=1 https://github.com/RetroPie/RetroPie-Setup.git
+git clone --depth=1 https://github.com/microplay-hub/RetroPie-NXT.git
 ```
 
 The script is executed with:
@@ -32,20 +35,15 @@ sudo ./retropie_setup.sh
 
 When you first run the script it may install some additional packages that are needed.
 
-Binaries and Sources
---------------------
 
-On the Raspberry Pi, RetroPie Setup offers the possibility to install from binaries or source. For other supported platforms only a source install is available. Installing from binary is recommended on a Raspberry Pi as building everything from source can take a long time.
+## RetroPie Menu-Screenshorts (MPCORE)
 
-For more information, visit the site at https://retropie.org.uk or the repository at https://github.com/RetroPie/RetroPie-Setup.
-
-Docs
-----
-
-You can find useful information about several components and answers to frequently asked questions in the [RetroPie Docs](https://retropie.org.uk/docs/). If you think that there is something missing, you are invited to submit a pull request to the [RetroPie-Docs repository](https://github.com/RetroPie/RetroPie-Docs).
+<img src="https://github.com/microplay-hub/mpcore-library/raw/main/Imagebase/_Moduls/retropie-managepackages.png" width="400" height="240"><img src="https://github.com/microplay-hub/mpcore-library/raw/main/Imagebase/_Moduls/retropie-packages-list.png" width="400" height="240"></br>
+<img src="https://github.com/microplay-hub/mpcore-library/raw/main/Imagebase/_Moduls/retropie-config.png" width="400" height="240"><img src="https://github.com/microplay-hub/mpcore-library/raw/main/Imagebase/_Moduls/retropie-cfg-list.png" width="400" height="240"></br>
+<img src="https://github.com/microplay-hub/mpcore-library/raw/main/Imagebase/_Moduls/retropie-update.png" width="400" height="240"><img src="https://github.com/microplay-hub/mpcore-library/raw/main/Imagebase/_Moduls/retropie-reboot.png" width="400" height="240">
 
 
-Thanks
-------
+## Microplay Guides
+You can find useful information and guides on the mpcore-library(https://github.com/microplay-hub/mpcore-library/tree/main/Guides)
 
-This script just simplifies the usage of the great works of many other people that enjoy the spirit of retrogaming. Many thanks go to them!
+For more information, visit the site at https://microplay-hub.de or the repository at https://github.com/microplay-hub/RetroPie-NXT.
