@@ -35,6 +35,28 @@ function build_mesa-drm() {
                            -Dnouveau=false -Dvmwgfx=false \
                            -Domap=false -Dfreedreno=false \
                            -Dtegra=false -Detnaviv=false -Dvc4=true)
+
+    isPlatform "sun8i-h3" && params+=(-Dintel=false -Dradeon=false \
+                           -Damdgpu=false -Dexynos=false \
+                           -Dnouveau=false -Dvmwgfx=false \
+                           -Domap=false -Dfreedreno=false \
+                           -Dtegra=false -Detnaviv=false \
+                           -Dvc4=false)
+
+    isPlatform "sun50i-h616" && params+=(-Dintel=false -Dradeon=false \
+                           -Damdgpu=false -Dexynos=false \
+                           -Dnouveau=false -Dvmwgfx=false \
+                           -Domap=false -Dfreedreno=false \
+                           -Dtegra=false -Detnaviv=false \
+                           -Dvc4=false)
+
+    isPlatform "sun50i-h6" && params+=(-Dintel=false -Dradeon=false \
+                           -Damdgpu=false -Dexynos=false \
+                           -Dnouveau=false -Dvmwgfx=false \
+                           -Domap=false -Dfreedreno=false \
+                           -Dtegra=false -Detnaviv=false \
+                           -Dvc4=false)
+                           
     meson builddir --prefix="$md_inst" "${params[@]}"
     ninja -C builddir
 
