@@ -16,7 +16,7 @@ rp_module_desc="libdrm - userspace library for drm"
 rp_module_licence="MIT https://www.mesa3d.org/license.html"
 rp_module_repo="git https://github.com/freedesktop/mesa-drm libdrm-2.4.114"
 rp_module_section="depends"
-rp_module_flags="sun50i-h616 sun50i-h6"
+rp_module_flags="!all sun50i-h616 sun50i-h6"
 
 function depends_libdrm() {
     local depends=(meson ninja-build libgbm-dev libdrm-dev libpciaccess-dev)
