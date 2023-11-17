@@ -133,6 +133,7 @@ function depends_emulationstation() {
         libfreeimage-dev libfreetype6-dev
         libcurl4-openssl-dev libasound2-dev cmake libsdl2-dev libsm-dev
         libvlc-dev libvlccore-dev vlc
+        libsdl2-mixer-dev
     )
 
     [[ "$__os_debian_ver" -gt 8 ]] && depends+=(rapidjson-dev)
@@ -157,17 +158,10 @@ function _get_branch_emulationstation() {
 function sources_emulationstation() {
     gitPullOrClone
 
+    if isPlatform "rpi"; then
         applyPatch "$scriptdir/scriptmodules/$md_type/emulationstation-nxt/emulationstation-100.02-PR725-background-music-player.patch"
-
-    if isPlatform "sun50i-h616"; then
-        applyPatch "$scriptdir/scriptmodules/$md_type/emulationstation-nxt/emulationstation-100.03-sound-menu.patch"
-    fi
-	
-    if isPlatform "sun50i-h6"; then
-        applyPatch "$scriptdir/scriptmodules/$md_type/emulationstation-nxt/emulationstation-100.03-sound-menu.patch"
-    fi
-	
-    if isPlatform "sun8i-h3"; then
+    else
+        applyPatch "$scriptdir/scriptmodules/$md_type/emulationstation-nxt/emulationstation-100.02-PR725-background-music-player.patch"
         applyPatch "$scriptdir/scriptmodules/$md_type/emulationstation-nxt/emulationstation-100.03-sound-menu.patch"
     fi
 }
