@@ -62,7 +62,7 @@ function install_tekmenu-icons() {
 	chmod 755 "$rpdir/icons"
 	rm -r "rpmenuicons.sh"
 
-    elif isPlatform "rpi"; then
+    if isPlatform "rpi"; then
     	cd "$md_inst"
 	
     	cp -r "$rpdir2/icons" "$md_inst2/icons_rpi"
@@ -100,7 +100,7 @@ function remove_tekmenu-icons() {
 	chmod 755 "$rpdir/icons"
 	rm -rf "$md_inst"
 
-    elif isPlatform "rpi"; then
+    if isPlatform "rpi"; then
     	rm -rf "$rpdir2/icons_rpi"
     	cp -r "$md_inst/icons_bkup_rpi" "$rpdir2/icons"
     	chown -R $user:$user "$rpdir2/icons"
