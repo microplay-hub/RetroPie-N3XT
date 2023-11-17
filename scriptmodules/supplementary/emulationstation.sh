@@ -160,7 +160,6 @@ function sources_emulationstation() {
 
     if isPlatform "rpi"; then
         applyPatch "$scriptdir/scriptmodules/$md_type/emulationstation-nxt/emulationstation-100.02-PR725-background-music-player.patch"
-        applyPatch "$scriptdir/scriptmodules/$md_type/emulationstation-nxt/emulationstation-100.03-sound-menu.patch"
     else
         applyPatch "$scriptdir/scriptmodules/$md_type/emulationstation-nxt/emulationstation-100.02-PR725-background-music-player.patch"
         applyPatch "$scriptdir/scriptmodules/$md_type/emulationstation-nxt/emulationstation-100.03-sound-menu.patch"
