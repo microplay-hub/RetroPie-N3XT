@@ -10,7 +10,7 @@
 # See the LICENSE.md file at the top-level directory of this distribution and
 # at https://raw.githubusercontent.com/RetroPie/RetroPie-Setup/master/LICENSE.md
 #
-# retropiemenu for RaspberryPi, OrangePi v1.4 - 2023-11-14
+# retropiemenu for RaspberryPi, OrangePi v1.41 - 2023-11-17
 
 rp_module_id="retropiemenu-nxt"
 rp_module_desc="RetroPie configuration menu for EmulationStation"
@@ -85,7 +85,7 @@ function configure_retropiemenu-nxt()
         'log'
         'showip'
         'splashscreen'
-        'splashscreen-opi'
+        'splashscreen-nxt'
         'opiwifi'
         'wifi'
     )
@@ -107,7 +107,7 @@ function configure_retropiemenu-nxt()
         'Run Command Logs'
         'Show IP'
         'Splash Screens'
-        'Splash Screens OPI'
+        'Splash Screens NXT'
         'On Board WiFi'
         'WiFi'
     )
@@ -129,7 +129,7 @@ function configure_retropiemenu-nxt()
         'Show last Runcommand Logfile'
         'Displays your current IP address, as well as other information provided by the command "ip addr show."'
         'Enable or disable the splashscreen on RetroPie boot. Choose a splashscreen, download new splashscreens, and return splashscreen to default.'
-        'Enable or disable the splashscreen on RetroPie boot for OrangePi. Choose a splashscreen, download new splashscreens, and return splashscreen to default.'
+        'Enable or disable the splashscreen on RetroPie boot for PiBoards. Choose a splashscreen, download new splashscreens, and return splashscreen to default.'
         'Connect to or disconnect from a WiFi network and configure OnBoard WiFi settings.'
         'Connect to or disconnect from a WiFi network and configure WiFi settings.'
     )
@@ -192,7 +192,6 @@ function platform_retropiemenu-nxt() {
 	elif isPlatform "rpi"; then
 		local rpdir="$datadir/retropiemenu-nxt"
 		rm -r "$rpdir/opiwifi.rp"
-		rm -r "$rpdir/splashscreen-opi.rp"
 		rm -r "$rpdir/armbianconfig.rp"
 		rm -r "$rpdir/orangepiconfig.rp"
     fi
