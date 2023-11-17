@@ -10,7 +10,7 @@
 # See the LICENSE.md file at the top-level directory of this distribution and
 # at https://raw.githubusercontent.com/RetroPie/RetroPie-Setup/master/LICENSE.md
 #
-# tekmenu-iconscript v1.4 - 2023-11-14
+# tekmenu-iconscript v1.41 - 2023-11-17
 
 rp_module_id="tekmenu-icons"
 rp_module_desc="Retropiemenu Icon-Settings for ES"
@@ -46,6 +46,7 @@ function install_tekmenu-icons() {
 		local rpdir="$datadir/retropiemenu-nxt"
     elif isPlatform "rpi"; then
 		local rpdir="$datadir/retropiemenu-nxt"
+		local rpdir2="$datadir/retropiemenu"
     fi
 	
     local rpiconsetup="$scriptdir/scriptmodules/supplementary"
@@ -60,6 +61,14 @@ function install_tekmenu-icons() {
 	chmod 755 "$rpiconsetup/rpmenuicons.sh"
 	chmod 755 "$rpdir/icons"
 	rm -r "rpmenuicons.sh"
+
+    elif isPlatform "rpi"; then
+    	cd "$md_inst"
+	
+    	cp -r "$rpdir2/icons" "$md_inst2/icons_rpi"
+    	cp -r "$rpdir2/icons" "$md_inst/icons_bkup_rpi"
+    	chown -R $user:$user "$rpdir2/icons"	
+    fi
 	
     if [[ ! -f "$configdir/all/$md_id.cfg" ]]; then
         iniConfig "=" '"' "$configdir/all/$md_id.cfg"
@@ -82,13 +91,22 @@ function remove_tekmenu-icons() {
 		local rpdir="$datadir/retropiemenu-nxt"
     elif isPlatform "rpi"; then
 		local rpdir="$datadir/retropiemenu-nxt"
+		local rpdir2="$datadir/retropiemenu"
     fi
 	
-    rm -rf "$rpdir/icons"	
+    rm -rf "$rpdir/icons"
     cp -r "$md_inst/icons_bkup" "$rpdir/icons"
     chown -R $user:$user "$rpdir/icons"
 	chmod 755 "$rpdir/icons"
 	rm -rf "$md_inst"
+
+    elif isPlatform "rpi"; then
+    	rm -rf "$rpdir2/icons_rpi"
+    	cp -r "$md_inst/icons_bkup_rpi" "$rpdir2/icons"
+    	chown -R $user:$user "$rpdir2/icons"
+	chmod 755 "$rpdir2/icons"
+	rm -rf "$md_inst"
+    fi
 
     rm -r "$configdir/all/$md_id.cfg"	
 }
@@ -136,8 +154,10 @@ function changestatus_tekmenu-icons() {
 			chmod 755 "$rpdir/icons"
 			    if isPlatform "rpi"; then
 				rm -rf "$rpdir2/icons"
- 				cp -r "$rpdir/icons" "$rpdir2/icons"
-     				chown -R $user:$user "$rpdir2/icons"
+				cd "$md_inst"
+ 				cp -r "icons_rpi" "$rpdir2/icons"
+				chown -R $user:$user "$rpdir2/icons"
+				chmod 755 "$rpdir2/icons"
     			    fi
 			iniSet "RPMCHANGE" "MODERN"
 			printMsgs "dialog" "Settings menu default icons installed."
@@ -150,8 +170,10 @@ function changestatus_tekmenu-icons() {
 			chmod 755 "$rpdir/icons"
    			    if isPlatform "rpi"; then
 				rm -rf "$rpdir2/icons"
- 				cp -r "$rpdir/icons" "$rpdir2/icons"
-     				chown -R $user:$user "$rpdir2/icons"
+				cd "$md_inst"
+ 				cp -r "icons_nes" "$rpdir2/icons"
+				chown -R $user:$user "$rpdir2/icons"
+				chmod 755 "$rpdir2/icons"
     			    fi
 			iniSet "RPMCHANGE" "NES"
  			printMsgs "dialog" "Settings menu nes icons installed."
@@ -164,8 +186,10 @@ function changestatus_tekmenu-icons() {
 			chmod 755 "$rpdir/icons"
    			    if isPlatform "rpi"; then
 				rm -rf "$rpdir2/icons"
- 				cp -r "$rpdir/icons" "$rpdir2/icons"
-     				chown -R $user:$user "$rpdir2/icons"
+				cd "$md_inst"
+ 				cp -r "icons_snes" "$rpdir2/icons"
+				chown -R $user:$user "$rpdir2/icons"
+				chmod 755 "$rpdir2/icons"
     			    fi
 			iniSet "RPMCHANGE" "SNES"
 			printMsgs "dialog" "Settings menu snes icons installed."
@@ -178,8 +202,10 @@ function changestatus_tekmenu-icons() {
 			chmod 755 "$rpdir/icons"
    			    if isPlatform "rpi"; then
 				rm -rf "$rpdir2/icons"
- 				cp -r "$rpdir/icons" "$rpdir2/icons"
-     				chown -R $user:$user "$rpdir2/icons"
+				cd "$md_inst"
+ 				cp -r "icons_smd" "$rpdir2/icons"
+				chown -R $user:$user "$rpdir2/icons"
+				chmod 755 "$rpdir2/icons"
     			    fi
 			iniSet "RPMCHANGE" "SMD-GENESIS"
 			printMsgs "dialog" "Settings menu smd-genesis icons installed."
@@ -192,8 +218,10 @@ function changestatus_tekmenu-icons() {
 			chmod 755 "$rpdir/icons"
    			    if isPlatform "rpi"; then
 				rm -rf "$rpdir2/icons"
- 				cp -r "$rpdir/icons" "$rpdir2/icons"
-     				chown -R $user:$user "$rpdir2/icons"
+				cd "$md_inst"
+ 				cp -r "icons_pce" "$rpdir2/icons"
+				chown -R $user:$user "$rpdir2/icons"
+				chmod 755 "$rpdir2/icons"
     			    fi
 			iniSet "RPMCHANGE" "PCE-TG16"
 			printMsgs "dialog" "Settings menu pce-tg16 icons installed."
@@ -206,8 +234,10 @@ function changestatus_tekmenu-icons() {
 			chmod 755 "$rpdir/icons"
    			    if isPlatform "rpi"; then
 				rm -rf "$rpdir2/icons"
- 				cp -r "$rpdir/icons" "$rpdir2/icons"
-     				chown -R $user:$user "$rpdir2/icons"
+				cd "$md_inst"
+ 				cp -r "icons_gb" "$rpdir2/icons"
+				chown -R $user:$user "$rpdir2/icons"
+				chmod 755 "$rpdir2/icons"
     			    fi
 			iniSet "RPMCHANGE" "GAMEBOY"
 			printMsgs "dialog" "Settings menu gameboy icons installed."
@@ -220,8 +250,10 @@ function changestatus_tekmenu-icons() {
 			chmod 755 "$rpdir/icons"
    			    if isPlatform "rpi"; then
 				rm -rf "$rpdir2/icons"
- 				cp -r "$rpdir/icons" "$rpdir2/icons"
-     				chown -R $user:$user "$rpdir2/icons"
+				cd "$md_inst"
+ 				cp -r "icons_fds" "$rpdir2/icons"
+				chown -R $user:$user "$rpdir2/icons"
+				chmod 755 "$rpdir2/icons"
     			    fi
 			iniSet "RPMCHANGE" "FAMICOM"
 			printMsgs "dialog" "Settings menu famicom icons installed."
@@ -229,13 +261,15 @@ function changestatus_tekmenu-icons() {
         C8)
             rm -rf "$rpdir/icons"
 			cd "$md_inst"
-            cp -r "icons_modern" "$rpdir/icons"
-            chown -R $user:$user "$rpdir/icons"
+            		cp -r "icons_modern" "$rpdir/icons"
+            		chown -R $user:$user "$rpdir/icons"
 			chmod 755 "$rpdir/icons"
    			    if isPlatform "rpi"; then
 				rm -rf "$rpdir2/icons"
- 				cp -r "$rpdir/icons" "$rpdir2/icons"
-     				chown -R $user:$user "$rpdir2/icons"
+				cd "$md_inst"
+ 				cp -r "icons_modern" "$rpdir2/icons"
+				chown -R $user:$user "$rpdir2/icons"
+				chmod 755 "$rpdir2/icons"
     			    fi
 			iniSet "RPMCHANGE" "MODERN"
 			printMsgs "dialog" "Settings menu modern icons installed."
