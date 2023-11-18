@@ -250,7 +250,7 @@ function motd_mpcore() {
 		chown -R $user:$user "/etc/update-motd.d/10-armbian-header"
 		chmod 755 "/etc/update-motd.d/10-armbian-header"
      elif isPlatform "rpi"; then
-		cp -r "/etc/update-motd.d/rpi-microplay-motd.sh" "/home/pi/rpi-microplay-motd.sh"
+		cp -r "motd_logo/rpi-microplay-motd.sh" "/home/pi/rpi-microplay-motd.sh"
   		ln -s /home/pi/rpi-microplay-motd.sh /etc/update-motd.d/11-microplay-welcome-message
 		touch "/home/pi/.bash_profile"
 		chown -R $user:$user "/home/pi/rpi-microplay-motd.sh"
