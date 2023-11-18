@@ -11,7 +11,7 @@
 # at https://raw.githubusercontent.com/RetroPie/RetroPie-Setup/master/LICENSE.md
 #
 # mpcore
-# v2.04
+# v2.05
 
 rp_module_id="mpcore"
 rp_module_desc="Microplay Base Setup"
@@ -86,27 +86,33 @@ function uninstall_mpcore() {
 		chown -R $user:$user "/etc/update-motd.d/10-armbian-header"
 		chmod 755 "/etc/update-motd.d/10-armbian-header"
 	elif isPlatform "rpi"; then
-		cp -r "/etc/update-motd.d/10-header.backup" "/etc/update-motd.d/10-header"
-		rm -r "/etc/update-motd.d/10-header.backup"
-		chown -R $user:$user "/etc/update-motd.d/10-header"
-		chmod 755 "/etc/update-motd.d/10-header"
+		rm -r "/etc/update-motd.d/11-microplay-welcome-message"
+		rm -r "/home/pi/rpi-microplay-motd.sh"
+		rm -r "/home/pi/.bash_profile"
     fi
 	
 	#remove screensaver
 	rm -r "Screensaver/." "/opt/retropie/configs/all/emulationstation/slideshow/media/mp_saver.png"
 
 	#default bootlogo settings
+    if isPlatform "sun50i-h616"; then
 	cp -r "/boot/boot.bmp.backup" "/boot/boot.bmp"
 	rm -r "/boot/boot.bmp.backup"
-	
-    if isPlatform "sun50i-h616"; then
-		sed -i "2s~.*~bootlogo=false~" /boot/orangepiEnv.txt
+	sed -i "2s~.*~bootlogo=false~" /boot/orangepiEnv.txt
     elif isPlatform "sun50i-h6"; then
-		sed -i "2s~.*~bootlogo=false~" /boot/orangepiEnv.txt
+	cp -r "/boot/boot.bmp.backup" "/boot/boot.bmp"
+	rm -r "/boot/boot.bmp.backup"
+	sed -i "2s~.*~bootlogo=false~" /boot/orangepiEnv.txt
     elif isPlatform "sun8i-h3"; then
-		sed -i "2s~.*~bootlogo=false~" /boot/armbianEnv.txt
+	cp -r "/boot/boot.bmp.backup" "/boot/boot.bmp"
+	rm -r "/boot/boot.bmp.backup"
+	sed -i "2s~.*~bootlogo=false~" /boot/armbianEnv.txt
     elif isPlatform "armv7-mali"; then
-		sed -i "2s~.*~bootlogo=false~" /boot/armbianEnv.txt
+	cp -r "/boot/boot.bmp.backup" "/boot/boot.bmp"
+	rm -r "/boot/boot.bmp.backup"
+	sed -i "2s~.*~bootlogo=false~" /boot/armbianEnv.txt
+    elif isPlatform "rpi"; then
+
     fi	
 	
 	#default hostname
@@ -122,6 +128,21 @@ function configmp_mpcore() {
 }
 
 
+function sshaccess_mpcore() {
+    if isPlatform "rpi"; then
+	echo "Activate Raspberry-PI SSH"
+	echo "Please wait"
+	sleep 1
+ 	systemctl start ssh
+  	systemctl enable ssh
+	sleep 1
+	echo "SSH-Status"
+ 	systemctl is-enabled ssh
+  	sleep 3
+    fi	
+
+
+}
 
 
 function defaccess_mpcore() {
@@ -153,21 +174,41 @@ function defcontrol_mpcore() {
 }
 
 function bootloader_mpcore() {
+    if isPlatform "sun50i-h616"; then
 	echo "install Bootloader"
 	chown -R root:root "/boot/boot.bmp"
 	cp -r "/boot/boot.bmp" "/boot/boot.bmp.backup"
 	cp -r "bootloader/boot.bmp" "/boot/boot.bmp"
 	chown -R root:root "/boot/boot.bmp"
 	chmod 755 "/boot/boot.bmp"
-		
-    if isPlatform "sun50i-h616"; then
-		sed -i "2s~.*~bootlogo=true~" /boot/orangepiEnv.txt
+	sed -i "2s~.*~bootlogo=true~" /boot/orangepiEnv.txt
     elif isPlatform "sun50i-h6"; then
-		sed -i "2s~.*~bootlogo=true~" /boot/orangepiEnv.txt
+	echo "install Bootloader"
+	chown -R root:root "/boot/boot.bmp"
+	cp -r "/boot/boot.bmp" "/boot/boot.bmp.backup"
+	cp -r "bootloader/boot.bmp" "/boot/boot.bmp"
+	chown -R root:root "/boot/boot.bmp"
+	chmod 755 "/boot/boot.bmp"
+	sed -i "2s~.*~bootlogo=true~" /boot/orangepiEnv.txt
     elif isPlatform "sun8i-h3"; then
-		sed -i "2s~.*~bootlogo=true~" /boot/armbianEnv.txt
+	echo "install Bootloader"
+	chown -R root:root "/boot/boot.bmp"
+	cp -r "/boot/boot.bmp" "/boot/boot.bmp.backup"
+	cp -r "bootloader/boot.bmp" "/boot/boot.bmp"
+	chown -R root:root "/boot/boot.bmp"
+	chmod 755 "/boot/boot.bmp"
+	sed -i "2s~.*~bootlogo=true~" /boot/armbianEnv.txt
     elif isPlatform "armv7-mali"; then
-		sed -i "2s~.*~bootlogo=true~" /boot/armbianEnv.txt
+	echo "install Bootloader"
+	chown -R root:root "/boot/boot.bmp"
+	cp -r "/boot/boot.bmp" "/boot/boot.bmp.backup"
+	cp -r "bootloader/boot.bmp" "/boot/boot.bmp"
+	chown -R root:root "/boot/boot.bmp"
+	chmod 755 "/boot/boot.bmp"
+	sed -i "2s~.*~bootlogo=true~" /boot/armbianEnv.txt
+    fi	
+    elif isPlatform "rpi"; then
+	echo "install Bootloader"
     fi	
 }
 
@@ -209,11 +250,14 @@ function motd_mpcore() {
 		cp -r "motd_logo/10-armbian-header" "/etc/update-motd.d/10-armbian-header"
 		chown -R $user:$user "/etc/update-motd.d/10-armbian-header"
 		chmod 755 "/etc/update-motd.d/10-armbian-header"
-	elif isPlatform "rpi"; then
-		cp -r "/etc/update-motd.d/10-header" "/etc/update-motd.d/10-header.backup"
-		cp -r "motd_logo/10-header" "/etc/update-motd.d/10-header"
-		chown -R $user:$user "/etc/update-motd.d/10-header"
-		chmod 755 "/etc/update-motd.d/10-header"
+     elif isPlatform "rpi"; then
+		cp -r "/etc/update-motd.d/rpi-microplay-motd.sh" "/home/pi/rpi-microplay-motd.sh"
+  		ln -s /home/pi/rpi-microplay-motd.sh /etc/update-motd.d/11-microplay-welcome-message
+		touch "/home/pi/.bash_profile"
+		chown -R $user:$user "/home/pi/rpi-microplay-motd.sh"
+		chown -R $user:$user "/home/pi/.bash_profile"
+		chmod 755 "/home/pi/rpi-microplay-motd.sh"
+		chmod 755 "/home/pi/.bash_profile"
     fi
 }
 
@@ -243,15 +287,49 @@ function platformcfg_mpcore() {
 		sudo apt-get install avahi-daemon
 		>/etc/dhcp/dhclient-enter-hooks.d/unset_old_hostname
     fi
+    elif isPlatform "rpi"; then
+		>/etc/dhcp/dhclient-enter-hooks.d/unset_old_hostname
+    fi
 }
 
 function useraccess_mpcore() {
+    if isPlatform "sun50i-h616"; then
 	echo "we change now the User Access"
 	yes mpcore | passwd root
 	yes mpcore | passwd pi
 	echo "User: pi , Passwd: mpcore"
 	echo "User: root , Passwd: mpcore"
 	sleep 6
+    elif isPlatform "sun50i-h6"; then
+	echo "we change now the User Access"
+	yes mpcore | passwd root
+	yes mpcore | passwd pi
+	echo "User: pi , Passwd: mpcore"
+	echo "User: root , Passwd: mpcore"
+	sleep 6
+    elif isPlatform "sun8i-h3"; then
+	echo "we change now the User Access"
+	yes mpcore | passwd root
+	yes mpcore | passwd pi
+	echo "User: pi , Passwd: mpcore"
+	echo "User: root , Passwd: mpcore"
+	sleep 6
+    elif isPlatform "armv7-mali"; then
+	echo "we change now the User Access"
+	yes mpcore | passwd root
+	yes mpcore | passwd pi
+	echo "User: pi , Passwd: mpcore"
+	echo "User: root , Passwd: mpcore"
+	sleep 6
+    fi
+    elif isPlatform "rpi"; then
+	echo "we change now the User Access"
+ 	yes microplay | passwd root
+	echo -e "raspberry\nmicroplay\nmicroplay" | passwd pi
+	echo "User: pi , Passwd: microplay"
+	echo "User: root , Passwd: microplay"
+	sleep 6
+    fi
 }
 
 function esfull_mpcore() {
@@ -278,7 +356,8 @@ function changestatus_mpcore() {
 			cd "$md_inst"
 			#mpcore base installer
 			header-inst_mpcore
-			#change the Useraccess
+			#change the User and SSH Access
+   			sshaccess_mpcore
 			useraccess_mpcore
 			#Set retropie folder permission
 			defaccess_mpcore
@@ -307,7 +386,7 @@ function changestatus_mpcore() {
 
 function header-inst_mpcore() {
 	echo "install & update mpcore-nxt base"
-	echo "v2.01 - 2023-03"
+	echo "v2.05 - 2023-11"
 	echo "#################################"
 	echo "*check the packages"
 	echo "*starting the installation"
