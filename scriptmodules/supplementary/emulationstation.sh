@@ -12,7 +12,7 @@
 rp_module_id="emulationstation"
 rp_module_desc="EmulationStation - Frontend used by RetroPie for launching emulators"
 rp_module_licence="MIT https://raw.githubusercontent.com/RetroPie/EmulationStation/master/LICENSE.md"
-rp_module_repo="git https://github.com/RetroPie/EmulationStation :_get_branch_emulationstation"
+rp_module_repo="git https://github.com/microplay-hub/ES-NXT :_get_branch_emulationstation"
 rp_module_section="core"
 rp_module_flags="frontend"
 
