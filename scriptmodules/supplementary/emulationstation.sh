@@ -12,7 +12,7 @@
 rp_module_id="emulationstation"
 rp_module_desc="EmulationStation - Frontend used by RetroPie for launching emulators"
 rp_module_licence="MIT https://raw.githubusercontent.com/RetroPie/EmulationStation/master/LICENSE.md"
-rp_module_repo="git https://github.com/microplay-hub/ES-NXT master"
+rp_module_repo="git https://github.com/RetroPie/EmulationStation :_get_branch_emulationstation"
 rp_module_section="core"
 rp_module_flags="frontend"
 
@@ -147,9 +147,9 @@ function depends_emulationstation() {
 function _get_branch_emulationstation() {
     if [[ -z "$branch" ]]; then
         if [[ "$__os_debian_ver" -gt 8 ]]; then
-            branch="stable"
+            branch="master"
         else
-            branch="v2.7.6"
+            branch="master"
         fi
     fi
     echo "$branch"
@@ -159,7 +159,7 @@ function sources_emulationstation() {
     gitPullOrClone
 
     if isPlatform "rpi"; then
-#        applyPatch "$scriptdir/scriptmodules/$md_type/emulationstation-nxt/emulationstation-100.02-PR725-background-music-player.patch"
+        echo "no Patch available"
     else
         applyPatch "$scriptdir/scriptmodules/$md_type/emulationstation-nxt/emulationstation-100.02-PR725-background-music-player.patch"
         applyPatch "$scriptdir/scriptmodules/$md_type/emulationstation-nxt/emulationstation-100.03-sound-menu.patch"
