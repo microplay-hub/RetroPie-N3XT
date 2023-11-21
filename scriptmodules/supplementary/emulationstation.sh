@@ -158,12 +158,12 @@ function _get_branch_emulationstation() {
 function sources_emulationstation() {
     gitPullOrClone
 
-    if isPlatform "rpi"; then
-        echo "no Patch available"
-    else
-        applyPatch "$scriptdir/scriptmodules/$md_type/emulationstation-nxt/emulationstation-100.02-PR725-background-music-player.patch"
-        applyPatch "$scriptdir/scriptmodules/$md_type/emulationstation-nxt/emulationstation-100.03-sound-menu.patch"
-    fi
+#    if isPlatform "rpi"; then
+#        echo "no Patch available"
+#    else
+#        applyPatch "$scriptdir/scriptmodules/$md_type/emulationstation-nxt/emulationstation-100.02-PR725-background-music-player.patch"
+#        applyPatch "$scriptdir/scriptmodules/$md_type/emulationstation-nxt/emulationstation-100.03-sound-menu.patch"
+#    fi
 }
 
 function build_emulationstation() {
