@@ -47,11 +47,59 @@ function install_mpcore() {
         iniSet "MPCORESTATUS" "not-installed"
         iniSet "MPCOREOSUPD" "not-updated"	
         iniSet "MPCOREHOST" "$HOST"
+        iniSet "MPBOARD" "not-detected"
         iniSet "RPIMSG" "Disable"
         iniSet "RPI4OC" "Disable"
     fi
     chown $user:$user "$configdir/all/$md_id.cfg"
 	chmod 755 "$configdir/all/$md_id.cfg"
+
+
+	
+    if isPlatform "sun50i-h616"; then
+		iniSet "MPBOARD" "sun50i-h616"
+    elif isPlatform "sun50i-h6"; then
+		iniSet "MPBOARD" "sun50i-h6"
+    elif isPlatform "sun8i-h3"; then
+		iniSet "MPBOARD" "sun8i-h3"
+    elif isPlatform "armv7-mali"; then
+		iniSet "MPBOARD" "armv7-mali"
+    elif isPlatform "rpi1"; then
+		iniSet "MPBOARD" "RPI1"	
+    elif isPlatform "rpi2"; then
+		iniSet "MPBOARD" "RPI2"	
+    elif isPlatform "rpi3"; then
+		iniSet "MPBOARD" "RPI3"		
+    elif isPlatform "rpi4"; then
+		iniSet "MPBOARD" "RPI4"		
+    elif isPlatform "rpi5"; then
+		iniSet "MPBOARD" "RPI5"	
+    fi
+	
+}
+
+function sbc_mpcore() {
+
+    if isPlatform "sun50i-h616"; then
+		iniSet "MPBOARD" "sun50i-h616"
+    elif isPlatform "sun50i-h6"; then
+		iniSet "MPBOARD" "sun50i-h6"
+    elif isPlatform "sun8i-h3"; then
+		iniSet "MPBOARD" "sun8i-h3"
+    elif isPlatform "armv7-mali"; then
+		iniSet "MPBOARD" "armv7-mali"
+    elif isPlatform "rpi1"; then
+		iniSet "MPBOARD" "RPI1"	
+    elif isPlatform "rpi2"; then
+		iniSet "MPBOARD" "RPI2"	
+    elif isPlatform "rpi3"; then
+		iniSet "MPBOARD" "RPI3"		
+    elif isPlatform "rpi4"; then
+		iniSet "MPBOARD" "RPI4"		
+    elif isPlatform "rpi5"; then
+		iniSet "MPBOARD" "RPI5"	
+    fi
+	
 }
 
 
@@ -445,6 +493,8 @@ function changestatus_mpcore() {
 			cd "$md_inst"
 			#mpcore base installer
 			header-inst_mpcore
+			#SBC Dedection
+			sbc_mpcore
 			#change the User and SSH Access
    			sshaccess_mpcore
 			useraccess_mpcore
@@ -498,6 +548,8 @@ function gui_mpcore() {
 		local mpcoreosupd=${ini_value}
 		iniGet "MPCOREHOST"
 		local mpcorehost=${ini_value}
+		iniGet "MPBOARD"
+		local mpboard=${ini_value}
 		iniGet "RPIMSG"
 		local rpimsg=${ini_value}
 		iniGet "RPI4OC"
@@ -514,11 +566,12 @@ function gui_mpcore() {
 			PR "Set retropie folder permissions back"
 			ZZ "Reboot System Now"
             TEK "### Script by Liontek1985 ###"
+            SBC "## SBC-Detected: $mpboard ##"
 		)
 		
 		if isPlatform "rpi"; then
 		options+=(
-			RPI "[Raspberry-PI - Options]"
+			RPI "*[ Raspberry-PI - Options ]*"
 			PQ "*RPI - config boot message ($rpimsg)"
 			PX "*RPI - Edit /boot/config.txt"
 			PY "*RPI - Edit /boot/cmdline.txt"
@@ -548,6 +601,8 @@ function gui_mpcore() {
 		local mpcoreosupd=${ini_value}
 		iniGet "MPCOREHOST"
 		local mpcorehost=${ini_value}
+		iniGet "MPBOARD"
+		local mpboard=${ini_value}
 		iniGet "RPIMSG"
 		local rpimsg=${ini_value}
 		iniGet "RPI4OC"
