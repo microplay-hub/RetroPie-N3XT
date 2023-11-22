@@ -566,7 +566,7 @@ function gui_mpcore() {
 			PR "Set retropie folder permissions back"
 			ZZ "Reboot System Now"
             TEK "### Script by Liontek1985 ###"
-            SBC "## SBC-Detected: $mpboard ##"
+            SBC "--- SBC-Auto-Config: $mpboard ---"
 		)
 		
 		if isPlatform "rpi"; then
