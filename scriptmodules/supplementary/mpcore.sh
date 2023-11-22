@@ -166,6 +166,18 @@ function osupdate_mpcore() {
 	iniSet "MPCOREOSUPD" "$NOW"
 }
 
+function fwupdate_mpcore() {
+
+    if isPlatform "rpi"; then
+	echo "...starting RPI Firmware-Update"
+	sleep 1
+	sudo apt install rpi-update -y
+	sleep 1
+    else
+	echo "...no Firmware-Updates"    
+    fi
+	
+}
 
 function defcontrol_mpcore() {
 	echo "set default Controller config"
@@ -386,7 +398,7 @@ function changestatus_mpcore() {
 
 function header-inst_mpcore() {
 	echo "install & update mpcore-nxt base"
-	echo "v2.05 - 2023-11"
+	echo "v2.06 - 2023-11"
 	echo "#################################"
 	echo "*check the packages"
 	echo "*starting the installation"
@@ -452,6 +464,7 @@ function gui_mpcore() {
             UP)
 			#OS UPDATE AND UPGRADE
 				osupdate_mpcore
+    				fwupdate_mpcore
 				;;
             HN)
 			#Edit Hostname
