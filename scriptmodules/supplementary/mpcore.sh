@@ -513,18 +513,27 @@ function gui_mpcore() {
 			HN "Edit Hostname (FTP/SSH: $mpcorehost)"
 			PR "Set retropie folder permissions back"
 			ZZ "Reboot System Now"
+            TEK "### Script by Liontek1985 ###"
 		)
+		
+		if isPlatform "rpi"; then
+		options+=(
+			RPI "[Raspberry-PI - Options]"
+			PQ "*RPI - config boot message ($rpimsg)"
+			PX "*RPI - Edit /boot/config.txt"
+			PY "*RPI - Edit /boot/cmdline.txt"
+		)
+		fi
+		
 		if isPlatform "rpi4"; then
 		options+=(
-			PO "*RPI4 - Overclocking ($rpi4oc)"
+			P4C "*RPI4 - Overclocking ($rpi4oc)"
 		)
 		fi
 		
 		if isPlatform "rpi"; then
 		options+=(
-			PQ "*RPI - config boot message ($rpimsg)"
-			PX "*RPI - Edit /boot/config.txt"
-			PY "*RPI - Edit /boot/cmdline.txt"
+
 		)
 		fi
 
@@ -576,11 +585,6 @@ function gui_mpcore() {
 				defaccess_mpcore
 				printMsgs "dialog" "original RetroPie rights restored"
 				;;
-            PO)
-			#RPI4 - overclocking
-				configmp_mpcore
-				rpi4oc_mpcore
-				;;
             PQ)
 			#RPI - config boot message
 				configmp_mpcore
@@ -593,6 +597,11 @@ function gui_mpcore() {
             PY)
 			#RPI - edit cmdline
 				editFile "/boot/cmdline.txt"
+				;;
+            P4C)
+			#RPI4 - overclocking
+				configmp_mpcore
+				rpi4oc_mpcore
 				;;
             ZZ)
 			#Reboot System Now
