@@ -183,6 +183,7 @@ function configure_ppsspp() {
     fi
 
     mkRomDir "psp"
+    mkRomDir "pspminis"
     if [[ "$md_mode" == "install" ]]; then
         moveConfigDir "$home/.config/ppsspp" "$md_conf_root/psp"
         mkUserDir "$md_conf_root/psp/PSP"
@@ -190,6 +191,7 @@ function configure_ppsspp() {
     fi
 
     addEmulator 0 "$md_id" "psp" "pushd $md_inst; $md_inst/PPSSPPSDL ${extra_params[*]} %ROM%; popd"
+    addEmulator 0 "$md_id" "pspminis" "pushd $md_inst; $md_inst/PPSSPPSDL ${extra_params[*]} %ROM%; popd"
     addSystem "psp"
     addSystem "pspminis"
 
