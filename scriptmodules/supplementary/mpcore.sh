@@ -11,7 +11,7 @@
 # at https://raw.githubusercontent.com/RetroPie/RetroPie-Setup/master/LICENSE.md
 #
 # mpcore
-# v2.08
+# v2.09a
 
 rp_module_id="mpcore"
 rp_module_desc="Microplay Base Setup"
@@ -477,10 +477,11 @@ function rpibootmsg_mpcore() {
 function rpi4oc_mpcore() {
     options=(	
         ROA "set RPI4 *OC-MOD-Safe* (C2000/G700/OV5)"
-        ROB "set RPI4 *OC-MOD-Med* (C2147/G700/OV6)"
+        ROB "set RPI4 *OC-MOD-Stable* (C2147/G700/OV6)"
         ROC "set RPI4 *OC-MOD-Max* (C2300/G750/OV14)"
         ROX "Disable OC-Mod"
-	ROZ "[current setting: $rpi4oc]"
+		ROZ "[current setting: $rpi4oc]"
+		XXX "~#~ OC ON OWN RISK ~#~"
     )
     local cmd=(dialog --backtitle "$__backtitle" --menu "Choose an option." 22 86 16)
     local choice=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
@@ -502,7 +503,7 @@ function rpi4oc_mpcore() {
 			else
 				sed -i "/700 MHz is the default/a over_voltage=6\narm_freq=2147\ngpu_freq=700\ngpu_mem=256" /boot/config.txt
 			fi
-            iniSet "RPI4OC" "OC-MOD-Med"
+            iniSet "RPI4OC" "OC-MOD-Stable"
             printMsgs "dialog" "Set $rpi4oc - CPU 2147Mhz GPU 700Mhz Overvoltage 6"
             ;;
 	    
@@ -579,7 +580,7 @@ function changestatus_mpcore() {
 
 function header-inst_mpcore() {
 	echo "install & update mpcore-nxt base"
-	echo "v2.08 - 2023-11"
+	echo "v2.09 - 2023-12"
 	echo "#################################"
 	echo "*check the packages"
 	echo "*starting the installation"
