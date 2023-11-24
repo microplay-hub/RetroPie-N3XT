@@ -53,6 +53,9 @@ function sources_ppsspp() {
     # ensure Pi vendor libraries are available for linking of shared library
     sed -n -i "p; s/^set(CMAKE_EXE_LINKER_FLAGS/set(CMAKE_SHARED_LINKER_FLAGS/p" cmake/Toolchains/raspberry.armv?.cmake
 
+    # fix missing defines on opengles2
+    applyPatch "$md_data/gles2_fix.diff"
+
     if hasPackage cmake 3.6 lt; then
         cd ..
         mkdir -p cmake
@@ -188,7 +191,6 @@ function configure_ppsspp() {
 
     addEmulator 0 "$md_id" "psp" "pushd $md_inst; $md_inst/PPSSPPSDL ${extra_params[*]} %ROM%; popd"
     addSystem "psp"
-    addSystem "pspminis"    
 
     # if we are removing the last remaining psp emu - remove the symlink
     if [[ "$md_mode" == "remove" ]]; then
