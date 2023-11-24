@@ -1,9 +1,9 @@
-MICROPLAY-HUB (RetroPie-Setup)
+MICROPLAY-HUB (RetroPie-N3XT)
 ========================
 
 <img src="https://github.com/microplay-hub/mpcore-splashscreens/raw/master/mpcore-splashscreen.png" width="320" height="180"><img src="https://github.com/Liontek1985/rpmenu-icons/raw/master/icons_nes/rpsetup.png" width="180" height="180"><img src="https://github.com/Liontek1985/tekcommand/raw/master/configs/nes/launching.png" width="300" height="160">
 
-This custom fork from RetroPie is optimized by microplay-hub and Liontek1985 for OrangePi-Devices and similar like sunxi
+This custom fork from RetroPie is optimized by microplay-hub and Liontek1985 for Allwinner-Devices(H3, H6, H616) and similar like sunxi and Raspberry PI Series
 
 ## General Information
 
@@ -23,7 +23,7 @@ Then you can download the latest RetroPie setup script with:
 
 ```shell
 cd
-git clone --depth=1 https://github.com/microplay-hub/RetroPie-NXT.git
+git clone --depth=1 https://github.com/microplay-hub/RetroPie-N3XT.git
 ```
 
 The script is executed with:
@@ -46,4 +46,4 @@ When you first run the script it may install some additional packages that are n
 ## Microplay Guides
 You can find useful information and guides on the mpcore-library(https://github.com/microplay-hub/mpcore-library/tree/main/Guides)
 
-For more information, visit the site at https://microplay-hub.de or the repository at https://github.com/microplay-hub/RetroPie-NXT.
+For more information, visit the site at https://microplay-hub.de or the repository at https://github.com/microplay-hub/RetroPie-N3XT.
