@@ -20,9 +20,9 @@ rp_module_flags=""
 function _get_release_ppsspp() {
     local tagged_version="v1.16.6"
     #  the V3D Mesa driver before 21.x has issues with v1.14 and later
-    if [[ "$__os_debian_ver" -lt 11 ]] && isPlatform "kms" && isPlatform "rpi"; then
-        tagged_version="v1.13.2"
-    fi
+#   if [[ "$__os_debian_ver" -lt 11 ]] && isPlatform "kms" && isPlatform "rpi"; then
+#       tagged_version="v1.13.2"
+#   fi
     echo $tagged_version
 }
 
