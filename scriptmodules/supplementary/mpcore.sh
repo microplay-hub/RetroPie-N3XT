@@ -476,9 +476,11 @@ function rpibootmsg_mpcore() {
 
 function rpi4oc_mpcore() {
     options=(	
-        ROA "set RPI4 Safe-OC-Mod"
-        ROB "Disable OC-Mod"
-		ROX "[current setting: $rpi4oc]"
+        ROA "set RPI4 *OC-MOD-Safe* (C2000/G700/OV5)"
+        ROB "set RPI4 *OC-MOD-Med* (C2147/G700/OV6)"
+        ROC "set RPI4 *OC-MOD-Max* (C2300/G750/OV14)"
+        ROX "Disable OC-Mod"
+	ROZ "[current setting: $rpi4oc]"
     )
     local cmd=(dialog --backtitle "$__backtitle" --menu "Choose an option." 22 86 16)
     local choice=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
@@ -491,9 +493,31 @@ function rpi4oc_mpcore() {
 				sed -i "/700 MHz is the default/a over_voltage=5\narm_freq=2000\ngpu_freq=700\ngpu_mem=256" /boot/config.txt
 			fi
             iniSet "RPI4OC" "OC-MOD-Safe"
-            printMsgs "dialog" "Set $rpi4oc - CPU 2000Mhz GPU 700Mhz Overvoltage 6"
+            printMsgs "dialog" "Set $rpi4oc - CPU 2000Mhz GPU 700Mhz Overvoltage 5"
             ;;
+
         ROB)
+			if grep -q "over_voltage=" /boot/config.txt; then
+				printMsgs "dialog" "PI already Overclocked"
+			else
+				sed -i "/700 MHz is the default/a over_voltage=6\narm_freq=2147\ngpu_freq=700\ngpu_mem=256" /boot/config.txt
+			fi
+            iniSet "RPI4OC" "OC-MOD-Med"
+            printMsgs "dialog" "Set $rpi4oc - CPU 2147Mhz GPU 700Mhz Overvoltage 6"
+            ;;
+	    
+     
+        ROC)
+			if grep -q "over_voltage=" /boot/config.txt; then
+				printMsgs "dialog" "PI already Overclocked"
+			else
+				sed -i "/700 MHz is the default/a over_voltage=14\narm_freq=2300\ngpu_freq=750\ngpu_mem=256" /boot/config.txt
+			fi
+            iniSet "RPI4OC" "OC-MOD-Max"
+            printMsgs "dialog" "Set $rpi4oc - CPU 2300Mhz GPU 750Mhz Overvoltage 14"
+            ;;
+	    
+        ROX)
 			if grep -q "over_voltage=" /boot/config.txt; then
 				sed -i "/^over_voltage=5*\s*$/d" /boot/config.txt
 				sed -i "/^arm_freq=2000*\s*$/d" /boot/config.txt
