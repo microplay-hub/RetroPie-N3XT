@@ -356,12 +356,21 @@ function platformcfg_mpcore() {
 			else
 				echo "dialog" "Overscan already Disabled"
 			fi
+
+      			if grep -q "console=tty1" /boot/cmdline.txt; then
+				sed -i "s/console=tty1/console=tty3/" /boot/cmdline.txt
+			fi
+
+         		if grep -q "console=tty3" /boot/cmdline.txt; then
+				echo "dialog" "console already tty3"
+			fi
 			
 			if grep -q "quiet" /boot/cmdline.txt; then
 				echo "dialog" "Boot-Message is already Disabled"
 			else
 				echo "quiet" >> /boot/cmdline.txt
 			fi
+
 		>/etc/dhcp/dhclient-enter-hooks.d/unset_old_hostname
     fi
 }
@@ -426,19 +435,40 @@ function rpibootmsg_mpcore() {
     case "$choice" in
         RPA)
 			if grep -q "quiet" /boot/cmdline.txt; then
-#				sed -i "s/quiet//" /boot/cmdline.txt
 				sed -i "/^quiet*\s*$/d" /boot/cmdline.txt
-			else
-				printMsgs "dialog" "Boot-Message is already Enabled"
+    			else
+				echo "dialog" "quiet mod already disabled"
+    				sleep 1
 			fi
+
+      			if grep -q "console=tty1" /boot/cmdline.txt; then
+				sed -i "s/console=tty1/console=tty3/" /boot/cmdline.txt
+			fi
+
+         		if grep -q "console=tty3" /boot/cmdline.txt; then
+				echo "dialog" "console already tty3"
+    				sleep 1
+			fi
+   
             iniSet "RPIMSG" "Enable"
             ;;
         RPB)
 			if grep -q "quiet" /boot/cmdline.txt; then
-				printMsgs "dialog" "Boot-Message is already Disabled"
+				echo "dialog" "quiet mod already enabled"
+        			sleep 1
 			else
 				echo "quiet" >> /boot/cmdline.txt
 			fi
+
+      			if grep -q "console=tty3" /boot/cmdline.txt; then
+				sed -i "s/console=tty3/console=tty1/" /boot/cmdline.txt
+			fi
+
+         		if grep -q "console=tty1" /boot/cmdline.txt; then
+				echo "dialog" "console already tty1"
+    				sleep 1
+			fi
+   
             iniSet "RPIMSG" "Disable"
             ;;
     esac
