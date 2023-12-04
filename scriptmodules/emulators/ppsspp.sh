@@ -85,6 +85,9 @@ function build_ffmpeg_ppsspp() {
         else
             arch="x86";
         fi
+    elif isPlatform "sun8i-h3"; then
+        source linux_arm.sh
+        arch='armv7'
     elif isPlatform "aarch64"; then
         arch="aarch64"
     fi
@@ -153,6 +156,12 @@ function build_ppsspp() {
         fi
     elif isPlatform "mesa"; then
         params+=(-DUSING_GLES2=ON -DUSING_EGL=OFF)
+	elif isPlatform "sun50i-h616"; then
+        params+=(-DUSING_EGL=OFF -DUSING_GLES2=ON -DUSE_FFMPEG=ON -DUSE_SYSTEM_FFMPEG=OFF -DUSING_FBDEV=ON -DARM64=ON -DVULKAN=OFF -DUSING_X11_VULKAN=OFF -DUSE_WAYLAND_WSI=OFF -DSIMULATOR=OFF -DUNITTEST=OFF -DHEADLESS=OFF -DMOBILE_DEVICE=OFF)
+	elif isPlatform "sun50i-h6"; then
+        params+=(-DUSING_EGL=OFF -DUSING_GLES2=ON -DUSE_FFMPEG=ON -DUSE_SYSTEM_FFMPEG=OFF -DUSING_FBDEV=ON -DARM64=ON -DVULKAN=OFF -DUSING_X11_VULKAN=OFF -DUSE_WAYLAND_WSI=OFF -DSIMULATOR=OFF -DUNITTEST=OFF -DHEADLESS=OFF -DMOBILE_DEVICE=OFF)
+	elif isPlatform "sun8i-h3"; then
+        params+=(-DUSING_EGL=OFF -DUSING_GLES2=ON -DUSE_FFMPEG=ON -DUSE_SYSTEM_FFMPEG=OFF -DUSING_FBDEV=ON -DVULKAN=OFF -DUSING_X11_VULKAN=OFF -DUSE_WAYLAND_WSI=OFF -DSIMULATOR=OFF -DUNITTEST=OFF -DHEADLESS=ON -DMOBILE_DEVICE=OFF -DUSING_QT_UI=OFF -DUSE_DISCORD=OFF -DCMAKE_SYSTEM_NAME=Linux -DCMAKE_BUILD_TYPE=Release)
     elif isPlatform "mali"; then
         params+=(-DUSING_GLES2=ON -DUSING_FBDEV=ON)
         # remove -DGL_GLEXT_PROTOTYPES on odroid-xu/tinker to avoid errors due to header prototype differences
@@ -188,21 +197,15 @@ function configure_ppsspp() {
     if ! isPlatform "x11"; then
         extra_params+=(--fullscreen)
     fi
-
-    mkRomDir "psp"
-    if [[ "$md_mode" == "install" ]]; then
-        moveConfigDir "$home/.config/ppsspp" "$md_conf_root/psp"
-        mkUserDir "$md_conf_root/psp/PSP"
-        ln -snf "$romdir/psp" "$md_conf_root/psp/PSP/GAME"
-    fi
-
-    addEmulator 0 "$md_id" "psp" "pushd $md_inst; $md_inst/PPSSPPSDL ${extra_params[*]} %ROM%; popd"
-    addSystem "psp"
-
-    # if we are removing the last remaining psp emu - remove the symlink
-    if [[ "$md_mode" == "remove" ]]; then
-        if [[ -h "$home/.config/ppsspp" && ! -f "$md_conf_root/psp/emulators.cfg" ]]; then
-            rm -f "$home/.config/ppsspp"
-        fi
-    fi
+	local system
+    for system in psp pspminis; do
+        mkRomDir "$system"
+        mkUserDir "$md_conf_root/$system/PSP"
+        ln -snf "$romdir/$system" "$md_conf_root/$system/PSP/GAME"
+	addEmulator 1 "$md_id" "$system" "$md_inst/PPSSPPSDL ${extra_params[*]} %ROM%"
+    addSystem "$system"
+	done
+	moveConfigDir "$home/.config/ppsspp" "$md_conf_root/psp"
+    ln -snf "$md_conf_root/psp/PSP/SYSTEM" "$md_conf_root/pspminis/PSP/SYSTEM"
+	
 }
