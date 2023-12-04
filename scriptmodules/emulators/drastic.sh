@@ -14,7 +14,7 @@ rp_module_desc="NDS emu - DraStic"
 rp_module_help="ROM Extensions: .nds .zip\n\nCopy your Nintendo DS roms to $romdir/nds"
 rp_module_licence="PROP"
 rp_module_section="exp"
-rp_module_flags="sdl2 !all arm !armv6 !mali"
+rp_module_flags="sdl2 !all arm !armv6 !mali sun8i-h3"
 
 function depends_drastic() {
     local depends=(libasound2-dev libsdl2-dev zlib1g-dev)
@@ -30,7 +30,12 @@ function __binary_url_drastic() {
 }
 
 function install_bin_drastic() {
-    downloadAndExtract "$(__binary_url_drastic)" "$md_inst" --strip-components 1
+    if isPlatform "sun8i-h3"; then
+        downloadAndExtract "https://github.com/microplay-hub/mpcore-library/raw/main/emulators/drastic.tar.gz" "$md_inst" --strip-components 1
+        patchVendorGraphics "$md_inst/drastic"
+    else
+        downloadAndExtract "$(__binary_url_drastic)" "$md_inst" --strip-components 1
+    fi
 }
 
 function configure_drastic() {
