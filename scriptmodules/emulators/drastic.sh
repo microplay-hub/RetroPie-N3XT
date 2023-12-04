@@ -30,7 +30,7 @@ function __binary_url_drastic() {
 }
 
 function install_bin_drastic() {
-    if isPlatform "sun8i-h3"; then
+    if isPlatform "sun8i-h3" && isPlatform "32bit"; then
         downloadAndExtract "https://github.com/microplay-hub/mpcore-library/raw/main/emulators/drastic.tar.gz" "$md_inst" --strip-components 1
         patchVendorGraphics "$md_inst/drastic"
     else
