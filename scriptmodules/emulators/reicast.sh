@@ -39,7 +39,7 @@ function _params_reicast() {
     local subplatform
     local params=()
 
-    # platform-specific params
+    # platform-specific params Raspberry
     if isPlatform "rpi" && isPlatform "32bit"; then
         # platform configuration
         if isPlatform "rpi4"; then
@@ -56,6 +56,13 @@ function _params_reicast() {
             subplatform="-sdl"
         elif isPlatform "mesa"; then
             subplatform="-mesa"
+        fi
+
+    # platform-specific params allwinner
+    if isPlatform "sun8i-h3" && isPlatform "32bit"; then
+        # platform configuration
+        if isPlatform "sun8i-h3"; then
+            platform="sun8i"
         fi
 
         params+=("platform=${platform}${subplatform}")
