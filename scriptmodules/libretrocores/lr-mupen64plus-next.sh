@@ -35,6 +35,9 @@ function build_lr-mupen64plus-next() {
     if isPlatform "arm"; then
         if isPlatform "videocore"; then
             params+=(platform="$__platform")
+        elif isPlatform "sun8i-h3"; then
+            params+=(WITH_DYNAREC=arm)
+            params+=(platform="armv")
         elif isPlatform "mesa"; then
             params+=(platform="$__platform-mesa")
         elif isPlatform "mali"; then
@@ -47,6 +50,13 @@ function build_lr-mupen64plus-next() {
             params+=(HAVE_NEON=0)
         fi
     fi
+
+    if isPlatform "sun50i-h6" && isPlatform "aarch64"; then
+            params+=(platform="arm64_cortex_a53_gles2")
+    if isPlatform "sun50i-h616" && isPlatform "aarch64"; then
+            params+=(platform="arm64_cortex_a53_gles3")
+    fi
+    
     if isPlatform "gles3"; then
         params+=(FORCE_GLES3=1)
     elif isPlatform "gles"; then
